@@ -15,11 +15,14 @@ cMain::cMain() : wxFrame(nullptr, wxID_ANY, "MainFrame", wxPoint(560, 240), wxSi
 
 	nField = new int[nFieldWidth * nFieldHeight];
 
+	wxFont font(24, wxFONTFAMILY_DEFAULT, wxFONTSTYLE_NORMAL, wxFONTWEIGHT_BOLD, false);
+
 	for (int x = 0; x < nFieldWidth; x++)
 	{
 		for (int y = 0; y < nFieldHeight; y++)
 		{
 			btn[y * nFieldWidth + x] = new wxButton(this, 10000 + (y * nFieldWidth + x));
+			btn[y * nFieldWidth + x]->SetFont(font);
 			grid->Add(btn[y * nFieldWidth + x], 1, wxEXPAND | wxALL);
 
 			btn[y * nFieldWidth + x]->Bind(wxEVT_COMMAND_BUTTON_CLICKED, &cMain::OnButtonClicked, this);
@@ -35,6 +38,7 @@ cMain::~cMain()
 {
 	//WX Widgets handels the deletion of it's objects
 	delete[] btn;
+	delete nField;
 }
 
 void cMain::OnButtonClicked(wxCommandEvent& evt)
